@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "ES6",
+        "moduleResolution": "node",
+        "jsx": "react-jsx", // 确保这是最新的 JSX 转换
+        "esModuleInterop": true,
+        "skipLibCheck": true, // 可以跳过库文件的类型检查，这在处理某些依赖库时会很有帮助
+        "strict": false, // 启用所有严格类型检查选项
+        "forceConsistentCasingInFileNames": true, // 强制文件名的大小写一致
+        "resolveJsonModule": true, // 允许导入 JSON 模块
+        "isolatedModules": true, // 每个文件都作为单独的模块
+        "outDir": "./dist", // 指定输出目录
+        "declaration": true, // 为 TypeScript 文件生成 .d.ts 声明文件
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ], // 标准库文件的列表
+        "baseUrl": "./", // 用于解析非相对模块名称的基本目录
+        "paths": { // 路径映射，可以为模块设置别名
+            // "somealias": ["some/real/path"]
+        }
+    },
+    "include": [
+        "client/src/**/*",
+        "client/types/**/*"
+    ], // 需要被编译的文件或文件夹
+    "exclude": [
+        "node_modules"
+    ] // 不需要被编译的文件或文件夹
+}

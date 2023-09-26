@@ -1,0 +1,34 @@
+.carousel {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 32px;
+  padding: 10px;
+  position: relative;
+}
+
+.carousel .frame {
+  align-items: center;
+  background-color: var(--secondary);
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+  width: 195px;
+}
+
+.carousel .element {
+  color: #ffffff;
+  font-family: var(--courier-regular-20-font-family);
+  font-size: var(--courier-regular-20-font-size);
+  font-style: var(--courier-regular-20-font-style);
+  font-weight: var(--courier-regular-20-font-weight);
+  letter-spacing: var(--courier-regular-20-letter-spacing);
+  line-height: var(--courier-regular-20-line-height);
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
