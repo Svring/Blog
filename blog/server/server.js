@@ -158,6 +158,19 @@ app.get('/api/posts/:searchTerm', async (req, res) => {
 app.get('/api/artworks', async (req, res) => {
     const artworks = await Artwork.find();
     const paths = artworks.map(artwork => artwork.path);
+
+    const transformedData = data.map(item => {
+        const date = new Date(item.createdAt);
+        return {
+            path: item.path,
+            appellation: item.appellation,
+            introduction: item.introduction,
+            year: date.getFullYear(),
+            month: date.getMonth() + 1, // getMonth() 返回 0-11
+            day: date.getDate()
+        };
+    });
+    
     res.status(200).send(paths);
 });
 

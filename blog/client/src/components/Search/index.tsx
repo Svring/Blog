@@ -57,7 +57,7 @@ export default function Search({ variant, title, setPostList }) {
           disabled={isLoading}
         />;
       case SearchVariant.title:
-        return <Title order={1}>{title}</Title>;
+        return <Title order={1} sx={{ color: theme.colors.white }} >{title}</Title>;
       default:
         return null;
     }
