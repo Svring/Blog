@@ -173,7 +173,7 @@ app.get('/api/artworks', async (req, res) => {
         };
     });
 
-    res.status(200).send(paths);
+    res.status(200).send({backgrounds: paths, artworks: transformedArtworks});
 });
 
 const server = app.listen(3000, function () {

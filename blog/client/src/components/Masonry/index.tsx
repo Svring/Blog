@@ -7,17 +7,19 @@ import {
 
 export default function MasonryFlow() {
   const theme = useMantineTheme();
+  const [backgrounds, setBackgrounds] = React.useState([]);
   const [artworks, setArtworks] = React.useState([]);
   const [columns, setColumns] = React.useState(3);
   const [artworkModal, setArtworkModal] = React.useState('');
   const [opened, { open, close }] = useDisclosure(false);
-  const columnsDivision = splitIntoColumns(artworks, columns);
+  const columnsDivision = splitIntoColumns(backgrounds, columns);
 
   React.useEffect(() => {
     fetch('/api/artworks')
       .then(res => res.json())
       .then(data => {
-        setArtworks(data);
+        setBackgrounds(data.backgrounds);
+        setArtworks(data.artworks);
       })
       .catch(err => console.error(err));
   }, []);
