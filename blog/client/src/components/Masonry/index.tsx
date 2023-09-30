@@ -9,6 +9,7 @@ export default function MasonryFlow() {
   const theme = useMantineTheme();
   const [artworks, setArtworks] = React.useState([]);
   const [columns, setColumns] = React.useState(3);
+  const [artworkModal, setArtworkModal] = React.useState('');
   const [opened, { open, close }] = useDisclosure(false);
   const columnsDivision = splitIntoColumns(artworks, columns);
 
@@ -30,16 +31,17 @@ export default function MasonryFlow() {
     return columns;
   }
 
-  function imageOnClick(artwork) {
+  function imageOnClick(e) {
+    setArtworkModal(e.target.src);
     open();
   }
 
-  function ImageDetail() {
+  function ArtworkDetail() {
     return (
       <Card w={'100%'} p={'md'}>
         <Group align='flex-start' sx={{ borderRadius: 'xl' }} >
           <Card.Section w={'30%'} sx={{ borderRadius: 'lg' }}>
-            <Image src={artworks[13]} radius={'lg'} />
+            <Image src={artworkModal} radius={'lg'} />
           </Card.Section>
           <Stack align={'flex-end'} >
             <Blockquote color="pink" mt="xl">
@@ -68,7 +70,7 @@ export default function MasonryFlow() {
               sx={{
                 cursor: 'pointer'
               }}
-              onClick={imageOnClick}
+              onClick={e => imageOnClick(e)}
             />
           </Card>
         ))}
@@ -80,7 +82,7 @@ export default function MasonryFlow() {
     <>
       <Modal opened={opened} onClose={close} title="Artwork" xOffset={'-10%'} size={'70vw'}
       >
-        <ImageDetail />
+        <ArtworkDetail />
       </Modal>
       <Container sx={{
         width: '60%',

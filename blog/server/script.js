@@ -1,28 +1,27 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const Background = require('./models/background');
+const Artwork = require('./models/artwork');
 
 const directoryPath = path.join(__dirname, './public/background');
 const mongoUrl = 'mongodb://localhost:27017/blog';  // 修改为您的MongoDB URI
 
-// 定义artwork模型
-const artworkSchema = new mongoose.Schema({
-    path: {
-        type: String,
-        required: true,
-    }
-}, {
-    timestamps: true  // 开启时间戳
-});
-const Artwork = mongoose.model('Artwork', artworkSchema);
+async function main() {
+    await mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
-async function saveToMongo(files) {
+    await Artwork.deleteMany({});
+
+    await mongoose.disconnect();
+}
+
+main();
+/* async function saveToMongo(files) {
     try {
         await mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-        await Artwork.deleteMany();
 
         const docs = files.map(file => ({ path: `./background/${file}` }));
-        await Artwork.insertMany(docs);
+        await Background.insertMany(docs);
 
         console.log('Files paths saved to MongoDB.');
     } catch (error) {
@@ -40,4 +39,4 @@ fs.readdir(directoryPath, (err, files) => {
 
     const jpegFiles = files.filter(file => path.extname(file).toLowerCase() === '.jpeg');
     saveToMongo(jpegFiles);
-});
+}); */

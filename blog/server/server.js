@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const Post = require('./models/post.js');
 const Artwork = require('./models/artwork.js');
+const Background = require('./models/background.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -156,10 +157,11 @@ app.get('/api/posts/:searchTerm', async (req, res) => {
 });
 
 app.get('/api/artworks', async (req, res) => {
-    const artworks = await Artwork.find();
-    const paths = artworks.map(artwork => artwork.path);
+    const backgrounds = await Background.find();
+    const paths = backgrounds.map(artwork => artwork.path);
 
-    const transformedData = data.map(item => {
+    const artworks = await Artwork.find();
+    const transformedArtworks = artworks.map(item => {
         const date = new Date(item.createdAt);
         return {
             path: item.path,
@@ -170,7 +172,7 @@ app.get('/api/artworks', async (req, res) => {
             day: date.getDate()
         };
     });
-    
+
     res.status(200).send(paths);
 });
 
