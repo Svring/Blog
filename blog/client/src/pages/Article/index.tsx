@@ -13,6 +13,8 @@ import {
 
 import { Flex, Group, Stack, useMantineTheme } from "@mantine/core";
 
+import CryptoJs from 'crypto-js';
+
 const Article = ({ }) => {
   // Mantine theme provider
   const theme = useMantineTheme();
@@ -68,6 +70,14 @@ const Article = ({ }) => {
 
   }, [reset]);
 
+  function encodeTitle(text) {
+    if (typeof text !== "string") {
+      text = JSON.stringify(text);
+    }
+    console.log(text, CryptoJs.enc.Base64.stringify(CryptoJs.SHA256(text)).slice(0, 20));
+    return CryptoJs.enc.Base64.stringify(CryptoJs.SHA256(text)).slice(0, 8);
+  }
+
   return (
     <Stack align="center" justify="center" spacing={'24px'} >
       <ButtonGroup variant={buttonGroupVariant} reset={setReset} />
@@ -75,7 +85,7 @@ const Article = ({ }) => {
         <Search variant={searchVariant} title={title} setPostList={setPostList} />
       </Flex>
       <Group position="center" align="center" sx={{ width: '100%' }}>
-        <Carousel variant={carouselVariant} content={content} timeline={timeline} />
+        <Carousel variant={carouselVariant} content={content} timeline={timeline} encode={encodeTitle} />
         <Content
           variant={contentVariant}
           content={content}
@@ -86,6 +96,7 @@ const Article = ({ }) => {
           setContent={setContent}
           setButtonGroupVariant={setButtonGroupVariant}
           setTitle={setTitle}
+          encode={encodeTitle}
         />
         <RightSide />
       </Group>

@@ -4,20 +4,25 @@ import {
   Image, Text, Code, Title, Anchor, Divider
 } from "@mantine/core";
 import ReactMarkdown from 'react-markdown';
+import sha256 from 'crypto-js/sha256';
 
-export default function Content({ content }) {
+export default function Content({ content, encode }) {
   const theme = useMantineTheme();
 
   function CustomH1(props) {
-    return <Title {...props} style={{ color: 'pink' }} />;
+    return <Title id={encode(props.children[0])} {...props} style={{ color: 'pink' }} />;
   }
 
   function CustomH2(props) {
-    return <Title order={2} {...props} sx={{ color: 'white', padding: '1rem' }} />;
+    return <Title id={encode(props.children[0])} order={2} {...props} sx={{ color: 'white', padding: '1rem' }} />;
   }
 
   function CustomH3(props) {
-    return <Title order={3} {...props} sx={{ color: 'white', padding: '1rem' }} />;
+    return <Title id={encode(props.children[0])} order={3} {...props} sx={{ color: 'white', padding: '1rem' }} />;
+  }
+
+  function CustomH4(props) {
+    return <Title id={encode(props.children[0])} order={4} {...props} sx={{ color: 'white', padding: '1rem' }} />;
   }
 
   function CustomCode(props) {
@@ -34,7 +39,7 @@ export default function Content({ content }) {
   }
 
   function CustomImg(props) {
-    return <Image {...props} fallbackSrc='react.svg'
+    return <Image {...props}
       sx={{ maxWidth: '100%', paddingBlock: '1rem' }} />
   }
 
@@ -51,6 +56,7 @@ export default function Content({ content }) {
     h1: CustomH1,
     h2: CustomH2,
     h3: CustomH3,
+    h4: CustomH4,
     img: CustomImg,
     p: CostumP,
     pre: CustomCode,

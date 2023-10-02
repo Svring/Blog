@@ -15,7 +15,8 @@ const Contain = ({
   setSearchVariant,
   setContent,
   setButtonGroupVariant,
-  setTitle
+  setTitle,
+  encode
 }) => {
   const theme = useMantineTheme();
 
@@ -32,7 +33,7 @@ const Contain = ({
     >
       {
         variant === ContentVariant.content ? (
-          <Content content={content.replace(/^#\s.*\n?/, "")} />
+          <Content content={content.replace(/^#\s.*\n?/, "")} encode={encode} />
         ) : (
           <PostList
             postList={postList}
@@ -42,6 +43,7 @@ const Contain = ({
             setSearchVariant={setSearchVariant}
             setButtonGroupVariant={setButtonGroupVariant}
             setTitle={setTitle}
+            encode={encode}
           />
         )
       }

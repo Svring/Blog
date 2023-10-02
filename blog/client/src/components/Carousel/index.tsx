@@ -4,7 +4,7 @@ import { Stack, useMantineTheme } from "@mantine/core";
 import "./style.css";
 
 // State about the number of items should be managed here
-const Carousel = ({ variant = '', content = {}, timeline = {} }) => {
+const Carousel = ({ variant = '', content = {}, timeline = {}, encode }) => {
   const theme = useMantineTheme();
   const [captions, setCaptions] = React.useState([]);
 
@@ -57,6 +57,7 @@ const Carousel = ({ variant = '', content = {}, timeline = {} }) => {
 
   React.useEffect(() => {
     setCaptions(extractHeadersFromMD(content));
+    console.log(extractHeadersFromMD(content));
   }, [content]);
 
   return (
@@ -70,7 +71,7 @@ const Carousel = ({ variant = '', content = {}, timeline = {} }) => {
         width: '10%'
       }}
     >
-      <List variant={variant} captions={captions} timeline={timeline} />
+      <List variant={variant} captions={captions} timeline={timeline} encode={encode} />
     </Stack>
 
   );

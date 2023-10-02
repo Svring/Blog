@@ -6,7 +6,7 @@ import {
 import { List, Text, Title, MantineProvider, Divider, Group } from "@mantine/core";
 
 const PostList = ({ postList, setContent, setContentVariant,
-  setCarouselVariant, setSearchVariant, setButtonGroupVariant, setTitle }) => {
+  setCarouselVariant, setSearchVariant, setButtonGroupVariant, setTitle, encode }) => {
   const [sortedList, setSortedList] = React.useState(postList);
 
   React.useEffect(() => {

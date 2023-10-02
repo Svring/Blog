@@ -2,7 +2,7 @@ import React from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import {
   Stack, Image, Grid, Container,
-  useMantineTheme, Card, Modal, Group, Blockquote
+  useMantineTheme, Card, Modal, Group, Blockquote, Title
 } from '@mantine/core';
 
 export default function MasonryFlow() {
@@ -10,9 +10,10 @@ export default function MasonryFlow() {
   const [backgrounds, setBackgrounds] = React.useState([]);
   const [artworks, setArtworks] = React.useState([]);
   const [columns, setColumns] = React.useState(3);
-  const [artworkModal, setArtworkModal] = React.useState('');
+  const [artworkModal, setArtworkModal]
+    = React.useState({ path: '', appellation: '', introduction: '' });
   const [opened, { open, close }] = useDisclosure(false);
-  const columnsDivision = splitIntoColumns(backgrounds, columns);
+  const columnsDivision = splitIntoColumns(artworks, columns);
 
   React.useEffect(() => {
     fetch('/api/artworks')
@@ -33,21 +34,22 @@ export default function MasonryFlow() {
     return columns;
   }
 
-  function imageOnClick(e) {
-    setArtworkModal(e.target.src);
+  function imageOnClick(image) {
+    setArtworkModal(image);
     open();
   }
 
   function ArtworkDetail() {
     return (
       <Card w={'100%'} p={'md'}>
-        <Group align='flex-start' sx={{ borderRadius: 'xl' }} >
+        <Group align='flex-start' noWrap sx={{ borderRadius: 'xl' }} >
           <Card.Section w={'30%'} sx={{ borderRadius: 'lg' }}>
-            <Image src={artworkModal} radius={'lg'} />
+            <Image src={artworkModal.path} radius={'lg'} />
           </Card.Section>
-          <Stack align={'flex-end'} >
+          <Stack align={'flex-start'} >
+            <Title>{artworkModal.appellation}</Title>
             <Blockquote color="pink" mt="xl">
-              Life is like an npm install – you never know what you are going to get.
+              {artworkModal.introduction}
             </Blockquote>
           </Stack>
         </Group>
@@ -67,12 +69,15 @@ export default function MasonryFlow() {
               background: 'linear-gradient(45deg, #f09433 0%, #f7ca45 25%, #d4e157 50%, #81d4fa 75%, #5c6bc0 100%, #FF0000 100%)',
             }}
           >
-            <Image key={index} src={img} alt={img}
+            <Image key={index} src={img.path} alt={img.path}
               radius={'lg'} width={'100%'} height={'auto'}
               sx={{
                 cursor: 'pointer'
               }}
-              onClick={e => imageOnClick(e)}
+              onClick={e => imageOnClick({
+                path: img.path, appellation: img.appellation, introduction: img.introduction,
+                year: img.year, month: img.month, day: img.day
+              })}
             />
           </Card>
         ))}
@@ -82,8 +87,7 @@ export default function MasonryFlow() {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Artwork" xOffset={'-10%'} size={'70vw'}
-      >
+      <Modal opened={opened} onClose={close} title="Artwork" xOffset={'-10%'} size={'70vw'}>
         <ArtworkDetail />
       </Modal>
       <Container sx={{

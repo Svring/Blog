@@ -41,8 +41,8 @@ async function saveToMongoSingle(file) {
         
         const doc = {
             path: `./artworks/${file}`,
-            appellation: 'girl',
-            introduction: 'here is a girl'
+            appellation: 'Pink_Bang_Girl',
+            introduction: 'Girl with black hair and blunt bang, not my work but is beautiful.'
         };
 
         await Artwork.create(doc);
@@ -62,7 +62,7 @@ fs.readdir(directoryPath, (err, files) => {
     }
 
     const jpegFiles = files.filter(file => path.extname(file).toLowerCase() === '.jpeg');
-    const specificJpegFile = files.filter(file => file.includes('Girl'));
+    const specificJpegFile = files.filter(file => file.includes('Pink_Bang_Girl'));
 
     //saveToMongo(jpegFiles);
     saveToMongoSingle(specificJpegFile);
