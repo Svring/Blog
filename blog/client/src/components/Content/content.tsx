@@ -4,7 +4,6 @@ import {
   Image, Text, Code, Title, Anchor, Divider
 } from "@mantine/core";
 import ReactMarkdown from 'react-markdown';
-import sha256 from 'crypto-js/sha256';
 
 export default function Content({ content, encode }) {
   const theme = useMantineTheme();
@@ -44,7 +43,7 @@ export default function Content({ content, encode }) {
   }
 
   function CustomAnchor(props) {
-    return <Anchor {...props} color="cyan" sx={{}} />
+    return <Anchor {...props} color="cyan" underline='never' sx={{}} />
   }
 
   function CustomDivider(props) {
