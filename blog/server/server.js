@@ -9,6 +9,8 @@ const cors = require('cors');
 mongoose.connect('mongodb://localhost/blog',
     { useNewUrlParser: true, useUnifiedTopology: true });
 
+console.log('hello');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
@@ -176,7 +178,7 @@ app.get('/api/artworks', async (req, res) => {
     res.status(200).send({backgrounds: paths, artworks: transformedArtworks});
 });
 
-const server = app.listen(3000, function () {
+const server = app.listen(3001, function () {
     const port = server.address().port;
     console.log('Listening at http://localhost:' + port);
 });
