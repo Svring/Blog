@@ -18,7 +18,7 @@ export default function MasonryFlow() {
   const columnsDivision = splitIntoColumns(artworks, columns);
 
   React.useEffect(() => {
-    fetch(`http://${contextValue}/api/artworks`)
+    fetch(`/api/artworks`)
       .then(res => res.json())
       .then(data => {
         setBackgrounds(data.backgrounds);
@@ -46,7 +46,7 @@ export default function MasonryFlow() {
       <Card w={'100%'} p={'md'}>
         <Group align='flex-start' noWrap sx={{ borderRadius: 'xl' }} >
           <Card.Section w={'30%'} sx={{ borderRadius: 'lg' }}>
-            <Image src={`http://${contextValue}/public/` + artworkModal.path} radius={'lg'} />
+            <Image src={`/public` + artworkModal.path.slice(1)} radius={'lg'} />
           </Card.Section>
           <Stack align={'flex-start'} >
             <Title>{artworkModal.appellation}</Title>
