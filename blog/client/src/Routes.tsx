@@ -5,6 +5,8 @@ import Exhibit from "./pages/Exhibit";
 import Article from "./pages/Article";
 import Gallery from "./pages/Gallery";
 
+export const myContext = React.createContext('');
+
 export default function CrossRoad() {
 
   return (
@@ -17,14 +19,16 @@ export default function CrossRoad() {
       },
       fontFamily: "athelas",
     }}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Exhibit />} />
-          <Route path='/exhibit' element={<Exhibit />} />
-          <Route path="/article" element={<Article />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Routes>
-      </Router>
+      <myContext.Provider value={'43.156.28.71'}>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Exhibit />} />
+            <Route path='/exhibit' element={<Exhibit />} />
+            <Route path="/article" element={<Article />} />
+            <Route path="/gallery" element={<Gallery />} />
+          </Routes>
+        </Router>
+      </myContext.Provider>
     </MantineProvider>
   )
 }

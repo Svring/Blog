@@ -1,5 +1,7 @@
 import React from "react";
 
+import { myContext } from "../../Routes";
+
 import ButtonGroup from "../../components/ButtonGroup";
 import Search from "../../components/Search";
 import Carousel from "../../components/Carousel";
@@ -18,6 +20,7 @@ import CryptoJs from 'crypto-js';
 const Article = ({ }) => {
   // Mantine theme provider
   const theme = useMantineTheme();
+  const contextValue = React.useContext(myContext);
 
   // Reset Article component
   const [reset, setReset] = React.useState(false);
@@ -49,7 +52,7 @@ const Article = ({ }) => {
           })
           .catch(err => console.error(err)); */
 
-    fetch('/api/time')
+    fetch(`http://${contextValue}/api/time`)
       .then(res => res.json())
       .then(data => {
         setTimeline(data);
