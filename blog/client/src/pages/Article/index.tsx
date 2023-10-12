@@ -52,7 +52,7 @@ const Article = ({ }) => {
           })
           .catch(err => console.error(err)); */
 
-    fetch(`http://${contextValue}/api/time`)
+    fetch(`/api/time`)
       .then(res => res.json())
       .then(data => {
         setTimeline(data);

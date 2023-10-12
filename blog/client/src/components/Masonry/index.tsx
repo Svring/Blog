@@ -1,4 +1,5 @@
 import React from 'react';
+import { myContext } from '../../Routes';
 import { useDisclosure } from '@mantine/hooks';
 import {
   Stack, Image, Grid, Container,
@@ -7,6 +8,7 @@ import {
 
 export default function MasonryFlow() {
   const theme = useMantineTheme();
+  const contextValue = React.useContext(myContext);
   const [backgrounds, setBackgrounds] = React.useState([]);
   const [artworks, setArtworks] = React.useState([]);
   const [columns, setColumns] = React.useState(3);
@@ -16,7 +18,7 @@ export default function MasonryFlow() {
   const columnsDivision = splitIntoColumns(artworks, columns);
 
   React.useEffect(() => {
-    fetch('/api/artworks')
+    fetch(`http://${contextValue}/api/artworks`)
       .then(res => res.json())
       .then(data => {
         setBackgrounds(data.backgrounds);
@@ -44,7 +46,7 @@ export default function MasonryFlow() {
       <Card w={'100%'} p={'md'}>
         <Group align='flex-start' noWrap sx={{ borderRadius: 'xl' }} >
           <Card.Section w={'30%'} sx={{ borderRadius: 'lg' }}>
-            <Image src={`http://43.156.28.71/public` + artworkModal.path} radius={'lg'} />
+            <Image src={`http://${contextValue}/public/` + artworkModal.path} radius={'lg'} />
           </Card.Section>
           <Stack align={'flex-start'} >
             <Title>{artworkModal.appellation}</Title>
