@@ -44,7 +44,7 @@ export default function MasonryFlow() {
       <Card w={'100%'} p={'md'}>
         <Group align='flex-start' noWrap sx={{ borderRadius: 'xl' }} >
           <Card.Section w={'30%'} sx={{ borderRadius: 'lg' }}>
-            <Image src={artworkModal.path} radius={'lg'} />
+            <Image src={`http://43.156.28.71/public` + artworkModal.path} radius={'lg'} />
           </Card.Section>
           <Stack align={'flex-start'} >
             <Title>{artworkModal.appellation}</Title>

@@ -5,15 +5,19 @@ const Artwork = require('./models/artwork.js');
 const Background = require('./models/background.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 mongoose.connect('mongodb://localhost/blog',
     { useNewUrlParser: true, useUnifiedTopology: true });
 
-console.log('hello');
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', async (req, res) => {
+    res.status(200).send('hello!');
+});
 
 //Dummy route for testing connection
 app.get('/api', async (req, res) => {
@@ -178,7 +182,8 @@ app.get('/api/artworks', async (req, res) => {
     res.status(200).send({backgrounds: paths, artworks: transformedArtworks});
 });
 
-const server = app.listen(3001, function () {
+const server = app.listen(3001, '0.0.0.0', function () {
     const port = server.address().port;
-    console.log('Listening at http://localhost:' + port);
+    console.log('Listening at http://0.0.0.0:' + port);
 });
+
