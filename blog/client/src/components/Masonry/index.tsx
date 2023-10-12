@@ -71,7 +71,7 @@ export default function MasonryFlow() {
               background: 'linear-gradient(45deg, #f09433 0%, #f7ca45 25%, #d4e157 50%, #81d4fa 75%, #5c6bc0 100%, #FF0000 100%)',
             }}
           >
-            <Image key={index} src={img.path} alt={img.path}
+            <Image key={index} src={`/public` + img.path.slice(1)} alt={img.path}
               radius={'lg'} width={'100%'} height={'auto'}
               sx={{
                 cursor: 'pointer'
