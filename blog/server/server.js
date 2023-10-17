@@ -19,12 +19,16 @@ app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+const asyncHandler = fn => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
+
 app.get('/', async (req, res) => {
     res.status(200).send('hello, stranger!');
 });
 
 //Dummy route for testing connection
-app.get('/api', utility.dummy);
+app.get('/api', asyncHandler(utility.dummy));
 
 //return a list contains the whole timeline
 /** Example data structure
@@ -57,7 +61,7 @@ app.get('/api', utility.dummy);
   }
 ]
  */
-app.get('/api/time', utility.time);
+app.get('/api/time', asyncHandler(utility.time));
 
 // app.get('/api/time', async (req, res) => {
 //     const documents = await Post.find().sort({ createdAt: -1 });
@@ -96,7 +100,7 @@ app.get('/api/time', utility.time);
 // });
 
 //return a specific post by id
-app.get('/api/post/:id', postController.findOne);
+app.get('/api/post/:id', asyncHandler(postController.findOne));
 
 // app.get('/api/post/:id', async (req, res) => {
 //     const postId = req.params.id;
@@ -105,7 +109,7 @@ app.get('/api/post/:id', postController.findOne);
 // });
 
 //return a whole list of titles of posts
-app.get('/api/posts', postController.findAll);
+app.get('/api/posts', asyncHandler(postController.findAll));
 
 // app.get('/api/posts/', async (req, res) => {
 //     Post.find({})
@@ -133,7 +137,7 @@ app.get('/api/posts', postController.findAll);
 
 //return the specific post by searchTerm
 
-app.get('/api/posts/search', postController.searchOne);
+app.get('/api/posts/search', asyncHandler(postController.searchOne));
 
 // app.get('/api/posts/:searchTerm', async (req, res) => {
 //     const searchTerm = req.params.searchTerm;
@@ -171,7 +175,7 @@ app.get('/api/posts/search', postController.searchOne);
 //         });
 // });
 
-app.get('/api/artworks', artworkController.getAllArtworks);
+app.get('/api/artworks', asyncHandler(artworkController.getAllArtworks));
 
 // app.get('/api/artworks', async (req, res) => {
 //     const backgrounds = await Background.find();
