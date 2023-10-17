@@ -193,10 +193,8 @@ app.get('/api/artworks', artworkController.getAllArtworks);
 //     res.status(200).send({backgrounds: paths, artworks: transformedArtworks});
 // });
 
-const server = app.listen(3001, '0.0.0.0', utility.server);
-
-// const server = app.listen(3001, '0.0.0.0', function () {
-//     const port = server.address().port;
-//     console.log('Listening at http://0.0.0.0:' + port);
-// });
+const server = app.listen(3001, '0.0.0.0', function () {
+    const port = server.address().port;
+    console.log('Listening at http://0.0.0.0:' + port);
+});
 
