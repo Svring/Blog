@@ -1,4 +1,5 @@
 const Artwork = require('../models/artwork');
+const Background = require('../models/background');
 
 module.exports = {
     // Get all artworks
