@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const Background = require('./models/background');
-const Artwork = require('./models/artwork');
+const Background = require('../models/background');
+const Artwork = require('../models/artwork');
 
 const directoryPath = path.join(__dirname, './public/artworks');
 const mongoUrl = 'mongodb://localhost:27017/blog';  // 修改为您的MongoDB URI
