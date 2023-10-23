@@ -13,6 +13,10 @@ const artworkSchema = new mongoose.Schema({
     introduction: {
         type: String,
         required: true
+    },
+    date: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true  // 开启时间戳
