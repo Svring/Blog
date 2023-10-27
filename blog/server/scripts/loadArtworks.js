@@ -4,7 +4,7 @@ const path = require('path');
 const Artwork = require('../models/artwork');
 
 async function loadAndSaveJSON(directory) {
-    mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true, useUnifiedTopology: true });
 
     try {
         const files = await fs.readdir(directory);
@@ -35,7 +35,6 @@ async function loadAndSaveJSON(directory) {
 loadAndSaveJSON('../public/artworks/intro')  // 这里请替换为你的JSON文件夹路径
     .then(() => {
         console.log(`Done processing files. Current time: ${new Date().toLocaleString()}`);
-        mongoose.disconnect();
     });
 
 module.exports = loadAndSaveJSON;

@@ -17,15 +17,17 @@ function executeSync() {
 
         if (update && update.summary.changes) {
             console.log("Updated files:", update.files, `Current time: ${new Date().toLocaleString()}`);
+
+            loadAndSaveJSON(directoryArtworkPath)
+                .then(() => {
+                    console.log(`Done processing files. Current time: ${new Date().toLocaleString()}`);
+                });
+                
         } else {
             console.log(`No updates. Current time: ${new Date().toLocaleString()}`);
         }
     });
 
-    loadAndSaveJSON(directoryArtworkPath)
-        .then(() => {
-            console.log(`Done processing files. Current time: ${new Date().toLocaleString()}`);
-        });
 }
 
 // 使用 node-cron 每半小时执行一次
