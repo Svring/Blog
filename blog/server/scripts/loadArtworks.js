@@ -32,7 +32,7 @@ async function loadAndSaveJSON(directory) {
     }
 }
 
-loadAndSaveJSON('/Users/linkling/Code/Projects/PersonalBlog/Blog/blog/server/public/artworks/intro')  // 这里请替换为你的JSON文件夹路径
+loadAndSaveJSON('../public/artworks/intro')  // 这里请替换为你的JSON文件夹路径
     .then(() => {
         console.log(`Done processing files. Current time: ${new Date().toLocaleString()}`);
         mongoose.disconnect();
