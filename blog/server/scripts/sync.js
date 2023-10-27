@@ -32,4 +32,4 @@ function executeSync() {
 cron.schedule('*/30 * * * *', executeSync);
 
 // 在启动时执行一次
-executeGitPull();
+executeSync();
