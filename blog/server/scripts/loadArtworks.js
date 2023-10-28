@@ -32,9 +32,4 @@ async function loadAndSaveJSON(directory) {
     }
 }
 
-loadAndSaveJSON('../public/artworks/intro')  // 这里请替换为你的JSON文件夹路径
-    .then(() => {
-        console.log(`Done processing files. Current time: ${new Date().toLocaleString()}`);
-    });
-
 module.exports = loadAndSaveJSON;
