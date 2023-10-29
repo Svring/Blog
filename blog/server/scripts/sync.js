@@ -1,8 +1,10 @@
 const git = require('simple-git');
 const cron = require('node-cron');
 const loadAndSaveJSON = require('./loadArtworks');
+const loadAndSaveImages = require('./loadBackgrounds');
 
 const directoryArtworkPath = '../public/artworks/intro';
+const directoryBackgroundPath = '../public/backgrounds';
 
 // 定义一个函数执行 git pull
 function executeSync() {
@@ -20,9 +22,14 @@ function executeSync() {
 
             loadAndSaveJSON(directoryArtworkPath)
                 .then(() => {
-                    console.log(`Done processing files. Current time: ${new Date().toLocaleString()}`);
+                    console.log(`Done updating artworks. Current time: ${new Date().toLocaleString()}`);
                 });
-                
+
+            loadAndSaveImages(directoryBackgroundPath)
+                .then(() => {
+                    console.log(`Done updating backgrounds. Current time: ${new Date().toLocaleString()}`);
+                })
+
         } else {
             console.log(`No updates. Current time: ${new Date().toLocaleString()}`);
         }
