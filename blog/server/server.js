@@ -43,6 +43,6 @@ app.get('/api/artworks', asyncHandler(artworkController.getAllArtworks));
 
 const server = app.listen(3001, '0.0.0.0', function () {
     const port = server.address().port;
-    console.log('Listening at http://0.0.0.0:' + port);
+    console.log('Listening at http://0.0.0.0:' + port +  `  Current time: ${new Date().toLocaleString()}` );
 });
 
